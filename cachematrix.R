@@ -1,14 +1,28 @@
-## Put comments here that give an overall description of what your
-## functions do
+## Functions that create a cached version of a matrix
+## and a function to solve (invert) the cached matrix.
+##
+## Will only recompute the solution if the matrix has
+## changed since the last time the solution was 
+## computed.
 
-## Write a short comment describing this function
+## Function to create an object to store a special 
+## matrix and its solution/inverse.
 
 makeCacheMatrix <- function(x = matrix()) {
-
+  inv <- NULL ## initially set the inverse to NULL
+  set <- function(y) {
+    x << y
+    inv << NULL
+  }
+  get <- function() x
+  setinv <- function(solve) inv <<- solve
+  getinv <- function() inv
+  list(set = set, get = get, setinv = setinv, getinv = getinv)
 }
 
 
-## Write a short comment describing this function
+## Function to compute the solution/inverse of a 
+## cached matrix object.
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
